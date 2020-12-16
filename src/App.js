@@ -1,13 +1,16 @@
+import 'react-native-gesture-handler';
+
 import React from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+
+import Onboarding from './pages/Onboarding';
 
 const App = () => (
-  <>
-    <StatusBar barStyle="dark-content" />
-    <View>
-      <Text>App</Text>
-    </View>
-  </>
+  <NavigationContainer>
+    <StatusBar barStyle="dark-content" backgroundColor="#000" />
+    <Onboarding />
+  </NavigationContainer>
 );
 
 export default App;
