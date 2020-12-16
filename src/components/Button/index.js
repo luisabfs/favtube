@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 
 import { ButtonContainer, ButtonText } from './styles';
 
-const Button = ({ children, mode, ...rest }) => (
-  <ButtonContainer mode={mode} {...rest}>
+const Button = ({ children, mode, onPress, ...rest }) => (
+  <ButtonContainer mode={mode} onPress={onPress} {...rest}>
     <ButtonText mode={mode}>{children}</ButtonText>
   </ButtonContainer>
 );
 
 Button.defaultProps = {
   mode: 'light',
+  onPress: () => null,
 };
 
 Button.propTypes = {
@@ -19,6 +20,7 @@ Button.propTypes = {
     PropTypes.node,
   ]).isRequired,
   mode: PropTypes.oneOf(['light', 'dark']),
+  onPress: PropTypes.func,
 };
 
 export default Button;
