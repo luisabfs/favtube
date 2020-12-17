@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { ButtonContainer, ButtonText } from './styles';
 
 const Button = ({ children, mode, onPress, ...rest }) => (
-  <ButtonContainer mode={mode} onPress={onPress} {...rest}>
+  <ButtonContainer activeOpacity={0.8} mode={mode} onPress={onPress} {...rest}>
     <ButtonText mode={mode}>{children}</ButtonText>
   </ButtonContainer>
 );
