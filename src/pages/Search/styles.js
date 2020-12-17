@@ -3,7 +3,12 @@ import RNIcon from 'react-native-vector-icons/FontAwesome';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
-export const Container = styled.View``;
+export const Container = styled.KeyboardAvoidingView.attrs({
+  behaviour: 'position',
+  persistentScrollbar: true,
+})`
+  flex: 1;
+`;
 
 export const Profile = styled.View`
   flex-direction: row;
@@ -27,8 +32,9 @@ export const Icon = styled(RNIcon)`
 `;
 
 export const SearchContainer = styled.View`
-  margin-top: 10px;
-  padding: 17px;
+  margin-top: 20px;
+  padding-left: 17px;
+  padding-right: 17px;
   align-items: center;
   justify-content: center;
 `;
@@ -46,4 +52,9 @@ export const TextInput = styled(Input)`
   margin: 0;
 `;
 
-export const List = styled.View``;
+export const List = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 17px;
+`;
