@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import Profile from '../../components/Profile';
 import Channel from '../../components/Channel';
 
@@ -8,10 +10,9 @@ import {
   Container,
   Wrapper,
   SmallButton,
-  Icon,
-  SearchContainer,
-  TextInput,
+  FavoritesContainer,
   List,
+  Title,
 } from './styles';
 
 const Favorites = () => {
@@ -21,12 +22,10 @@ const Favorites = () => {
     <Container>
       <Profile />
 
-      <SearchContainer>
+      <FavoritesContainer>
         <Wrapper>
-          <TextInput placeholder="Channels" />
-          <SmallButton mode="dark">
-            <Icon name="search" size={16} />
-          </SmallButton>
+          <Icon name="star" size={30} />
+          <Title>My favorites</Title>
         </Wrapper>
 
         <List>
@@ -36,7 +35,7 @@ const Favorites = () => {
           <Channel />
           <Channel />
         </List>
-      </SearchContainer>
+      </FavoritesContainer>
 
       <SmallButton mode="dark" onPress={() => navigation.goBack()}>
         back
