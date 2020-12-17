@@ -32,6 +32,7 @@
     "react/jsx-curly-newline": "off",
     "object-curly-newline":"off",
     "implicit-arrow-linebreak":"off",
+    "arrow-parens":"off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-unused-expressions": "off",
     "prettier/prettier": "error"
