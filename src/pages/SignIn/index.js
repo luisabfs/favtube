@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
+// eslint-disable-next-line import/no-cycle
+import SignUp from '../SignUp';
+
 import { Container, Wrapper, Title, SmallButton } from './styles';
 
-const SignIn = () => (
+const SignIn = ({ setModal }) => (
   <Container>
     <Title>Welcome</Title>
 
@@ -16,9 +20,22 @@ const SignIn = () => (
 
     <Wrapper>
       <Button mode="dark">Sign in</Button>
-      <SmallButton>new user</SmallButton>
+      <SmallButton
+        onPress={() =>
+          setModal({
+            isVisible: true,
+            content: () => <SignUp setModal={setModal} />,
+          })
+        }
+      >
+        new user
+      </SmallButton>
     </Wrapper>
   </Container>
 );
+
+SignIn.propTypes = {
+  setModal: PropTypes.func.isRequired,
+};
 
 export default SignIn;

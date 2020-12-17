@@ -18,11 +18,17 @@ const Onboarding = () => {
   });
 
   const openSignInModal = useCallback(() => {
-    setModal({ isVisible: true, content: () => <SignIn /> });
+    setModal({
+      isVisible: true,
+      content: () => <SignIn setModal={setModal} />,
+    });
   }, []);
 
   const openSignUpModal = useCallback(() => {
-    setModal({ isVisible: true, content: () => <SignUp /> });
+    setModal({
+      isVisible: true,
+      content: () => <SignUp setModal={setModal} />,
+    });
   }, []);
 
   return (
