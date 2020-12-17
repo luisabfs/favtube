@@ -6,7 +6,7 @@ export const Container = styled.View`
   align-items: center;
   width: 100%;
   height: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 `;
 
 export const Title = styled.Text`
@@ -14,6 +14,11 @@ export const Title = styled.Text`
   font-size: 16px;
   margin-left: 10px;
   margin-right: auto;
+`;
+
+export const Thumbnail = styled.Image`
+  width: 40px;
+  height: 40px;
 `;
 
 export const SmallButton = styled(Button)`

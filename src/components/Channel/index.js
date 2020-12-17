@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { Container, Title, SmallButton } from './styles';
+import { Container, Title, Thumbnail, SmallButton } from './styles';
 
 const Channel = ({ title, thumbnail }) => {
   const [favorite, setFavorite] = useState(false);
 
   return (
     <Container>
-      <Image style={{ width: 40, height: 40 }} source={{ uri: thumbnail }} />
+      <Thumbnail source={{ uri: thumbnail }} />
 
       <Title>{title}</Title>
 
