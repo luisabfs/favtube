@@ -3,6 +3,7 @@ import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../hooks/auth';
 
 import Avatar from '../../assets/avatar.png';
 
@@ -10,12 +11,13 @@ import { Container, Wrapper, Title, Icon, SmallButton } from './styles';
 
 const Profile = ({ hasFavorite }) => {
   const navigation = useNavigation();
+  const { user, signOut } = useAuth();
 
   return (
     <Container>
       <Wrapper>
         <Image source={Avatar} />
-        <Title>Username</Title>
+        <Title>{user.email}</Title>
       </Wrapper>
 
       <Wrapper>
@@ -28,7 +30,7 @@ const Profile = ({ hasFavorite }) => {
           </SmallButton>
         )}
 
-        <SmallButton mode="dark">
+        <SmallButton mode="dark" onPress={signOut}>
           <Icon name="sign-out" color="#fff" size={16} />
         </SmallButton>
       </Wrapper>
