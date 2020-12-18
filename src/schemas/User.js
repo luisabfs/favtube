@@ -4,6 +4,7 @@ const UserSchema = {
   properties: {
     email: 'string',
     password: 'string',
+    logged: { type: 'bool', default: false },
   },
 };
 
