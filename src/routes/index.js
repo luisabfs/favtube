@@ -4,7 +4,7 @@ import AppRoutes from './app.routes';
 import AuthRoutes from './auth.routes';
 
 const Routes = () => {
-  const user = true;
+  const user = false;
 
   return user ? <AppRoutes /> : <AuthRoutes />;
 };
