@@ -6,10 +6,14 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import Routes from './routes';
 
+import AppProvider from './hooks';
+
 const App = () => (
   <NavigationContainer>
     <StatusBar barStyle="dark-content" backgroundColor="#000" />
-    <Routes />
+    <AppProvider>
+      <Routes />
+    </AppProvider>
   </NavigationContainer>
 );
 
