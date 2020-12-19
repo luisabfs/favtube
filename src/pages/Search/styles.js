@@ -25,6 +25,7 @@ export const Profile = styled.View`
 export const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `;
 
 export const Icon = styled(RNIcon)`
@@ -32,14 +33,16 @@ export const Icon = styled(RNIcon)`
 `;
 
 export const SearchContainer = styled.View`
-  margin-top: 20px;
+  margin-top: 15px;
   padding-left: 17px;
   padding-right: 17px;
   align-items: center;
   justify-content: center;
 `;
 
-export const SmallButton = styled(Button)`
+export const SmallButton = styled(Button).attrs(props => ({
+  disabled: props.disabled,
+}))`
   margin: 0;
   height: 40px;
   padding: 0 12px;
@@ -57,4 +60,5 @@ export const List = styled.View`
   align-items: center;
   justify-content: center;
   padding: 17px;
+  padding-bottom: 0;
 `;

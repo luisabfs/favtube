@@ -50,6 +50,7 @@ const SignUp = ({ setModal }) => {
           onChangeText={setEmail}
           keyboardType="email-address"
         />
+
         <Input
           value={password}
           secureTextEntry

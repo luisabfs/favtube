@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { ActivityIndicator, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, ScrollView, Alert } from 'react-native';
 
 import { API_KEY } from '@env';
 
@@ -19,24 +19,44 @@ import {
 } from './styles';
 
 const Search = () => {
-  const [channels, setChannels] = useState([]);
+  const [channels, setChannels] = useState({
+    items: [],
+    nextPageToken: '',
+    prevPageToken: '',
+  });
+  const [pageToken, setPageToken] = useState('');
   const [loading, setLoading] = useState(false);
   const [inputData, setInputData] = useState();
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = async () => {
     setLoading(true);
 
     try {
       const { data } = await api.get(
-        `?part=snippet&type=channel&q=${inputData}&maxResults=10&key=${API_KEY}`,
+        `?part=snippet&type=channel&q=${inputData}&maxResults=10&pageToken=${pageToken}&key=${API_KEY}`,
       );
-      setChannels(data.items);
+
+      setChannels({
+        items: data.items,
+        nextPageToken: data.nextPageToken,
+        prevPageToken: data.prevPageToken,
+      });
 
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      Alert.alert('Error retrieving Youtube channels. Please try again');
     }
-  }, [inputData]);
+  };
+
+  const prevPage = () => {
+    setPageToken(channels.prevPageToken);
+    handleSubmit();
+  };
+
+  const nextPage = () => {
+    setPageToken(channels.nextPageToken);
+    handleSubmit();
+  };
 
   return (
     <Container>
@@ -45,8 +65,9 @@ const Search = () => {
       <SearchContainer>
         <Wrapper>
           <TextInput
+            value={inputData}
             placeholder="Channels"
-            onChangeText={text => setInputData(text)}
+            onChangeText={setInputData}
             onSubmitEditing={handleSubmit}
           />
           <SmallButton mode="dark" onPress={handleSubmit}>
@@ -60,7 +81,7 @@ const Search = () => {
           <ActivityIndicator color="#000" size={30} />
         ) : (
           <ScrollView>
-            {channels.map(channel => (
+            {channels.items.map(channel => (
               <Channel
                 key={channel.id.channelId}
                 title={channel.snippet.title}
@@ -70,6 +91,22 @@ const Search = () => {
           </ScrollView>
         )}
       </List>
+
+      {channels.items.length !== 0 && !loading && (
+        <Wrapper>
+          <SmallButton onPress={prevPage} disabled={!channels.prevPageToken}>
+            <Icon
+              name="chevron-left"
+              size={16}
+              color={!channels.prevPageToken ? '#aaa' : '#000'}
+            />
+          </SmallButton>
+
+          <SmallButton onPress={nextPage}>
+            <Icon name="chevron-right" size={16} />
+          </SmallButton>
+        </Wrapper>
+      )}
     </Container>
   );
 };
