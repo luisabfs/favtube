@@ -10,7 +10,7 @@ const Modal = ({ modalVisible, setModal, children }) => {
   const closeModal = useCallback(() => {
     setModal({
       isVisible: false,
-      content: () => null,
+      content: '',
     });
   }, [setModal]);
 

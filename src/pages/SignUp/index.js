@@ -5,9 +5,6 @@ import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
-// eslint-disable-next-line import/no-cycle
-import SignIn from '../SignIn';
-
 import getRealm from '../../services/realm';
 
 import { Container, Wrapper, Title, SmallButton } from './styles';
@@ -31,7 +28,7 @@ const SignUp = ({ setModal }) => {
 
       setModal({
         isVisible: false,
-        content: () => <SignIn setModal={setModal} />,
+        content: '',
       });
     } catch (error) {
       Alert.alert(error.message);
@@ -67,7 +64,7 @@ const SignUp = ({ setModal }) => {
           onPress={() =>
             setModal({
               isVisible: true,
-              content: () => <SignIn setModal={setModal} />,
+              content: 'signin',
             })
           }
         >

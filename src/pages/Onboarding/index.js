@@ -14,20 +14,20 @@ import { Container, Wrapper, Title } from './styles';
 const Onboarding = () => {
   const [modal, setModal] = useState({
     isVisible: false,
-    content: () => null,
+    content: '',
   });
 
   const openSignInModal = useCallback(() => {
     setModal({
       isVisible: true,
-      content: () => <SignIn setModal={setModal} />,
+      content: 'signin',
     });
   }, []);
 
   const openSignUpModal = useCallback(() => {
     setModal({
       isVisible: true,
-      content: () => <SignUp setModal={setModal} />,
+      content: 'signup',
     });
   }, []);
 
@@ -46,7 +46,11 @@ const Onboarding = () => {
       </Container>
 
       <Modal modalVisible={modal.isVisible} setModal={setModal}>
-        {modal.content()}
+        {modal.content === 'signin' ? (
+          <SignIn setModal={setModal} />
+        ) : (
+          <SignUp setModal={setModal} />
+        )}
       </Modal>
     </>
   );

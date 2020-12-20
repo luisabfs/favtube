@@ -7,9 +7,6 @@ import Input from '../../components/Input';
 
 import { useAuth } from '../../hooks/auth';
 
-// eslint-disable-next-line import/no-cycle
-import SignUp from '../SignUp';
-
 import { Container, Wrapper, Title, SmallButton } from './styles';
 
 const SignIn = ({ setModal }) => {
@@ -54,7 +51,7 @@ const SignIn = ({ setModal }) => {
           onPress={() =>
             setModal({
               isVisible: true,
-              content: () => <SignUp setModal={setModal} />,
+              content: 'signup',
             })
           }
         >
