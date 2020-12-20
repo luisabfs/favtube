@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { View, Modal as RNModal } from 'react-native';
 import PropTypes from 'prop-types';
 
+import Icon from 'react-native-vector-icons/AntDesign';
 import Button from '../Button';
 
 import { Container, Content } from './styles';
@@ -20,7 +21,7 @@ const Modal = ({ modalVisible, setModal, children }) => {
         <Container>
           <Content>
             <Button style={{ alignSelf: 'flex-end' }} onPress={closeModal}>
-              X
+              <Icon name="close" size={30} />
             </Button>
 
             {children}
