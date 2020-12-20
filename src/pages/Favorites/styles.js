@@ -34,4 +34,10 @@ export const TextInput = styled(Input)`
   margin: 0;
 `;
 
-export const List = styled.View``;
+export const List = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding-bottom: 0;
+`;

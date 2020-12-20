@@ -84,6 +84,7 @@ const Search = () => {
             {channels.items.map(channel => (
               <Channel
                 key={channel.id.channelId}
+                id={channel.id.channelId}
                 title={channel.snippet.title}
                 thumbnail={channel.snippet.thumbnails.default.url}
               />
