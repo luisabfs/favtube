@@ -32,9 +32,7 @@ export const AuthProvider = ({ children }) => {
   const signIn = useCallback(async ({ email, password }) => {
     const realm = await getRealm();
 
-    const objects = realm.objects('User');
-
-    const user = objects.find(object => object.email === email);
+    const user = realm.objects('User').find(object => object.email === email);
 
     if (!user) {
       throw new Error('Incorrect email/password confirmation');

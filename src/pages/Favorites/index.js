@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import getRealm from '../../services/realm';
+import { useAuth } from '../../hooks/auth';
 
 import Profile from '../../components/Profile';
 import Channel from '../../components/Channel';
@@ -19,6 +19,8 @@ import {
 } from './styles';
 
 const Favorites = () => {
+  const { user } = useAuth();
+
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [favorites, setFavorites] = useState([]);
@@ -26,11 +28,6 @@ const Favorites = () => {
   useEffect(() => {
     async function loadFavorites() {
       setLoading(true);
-      const realm = await getRealm();
-
-      const user = realm
-        .objects('User')
-        .find(storedUser => storedUser.logged === true);
 
       if (user) {
         setFavorites(user.favorites);
@@ -40,7 +37,7 @@ const Favorites = () => {
     }
 
     loadFavorites();
-  }, []);
+  }, [user]);
 
   return (
     <Container>
