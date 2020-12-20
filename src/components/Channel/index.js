@@ -3,41 +3,43 @@ import PropTypes from 'prop-types';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { useAuth } from '../../hooks/auth';
 import getRealm from '../../services/realm';
 
 import { Container, Title, Thumbnail, SmallButton } from './styles';
 
 const Channel = ({ id, title, thumbnail }) => {
+  const { user } = useAuth();
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     async function loadFavorite() {
-      const realm = await getRealm();
-
-      const user = realm
-        .objects('User')
-        .find(storedUser => storedUser.logged === true);
-
       const isFavorite = user.favorites.find(fav => fav.id === id);
 
       setFavorite(!!isFavorite);
     }
 
     loadFavorite();
-  }, [id]);
+  }, [id, user.favorites]);
 
   const handleAddFavorite = async () => {
     const realm = await getRealm();
 
-    const user = realm
-      .objects('User')
-      .find(storedUser => storedUser.logged === true);
+    realm.write(() => {
+      user.favorites.push({ id, title, thumbnail });
+    });
 
-    if (user && !favorite) {
-      realm.write(() => {
-        user.favorites.push({ id, title, thumbnail });
-      });
-    }
+    setFavorite(!favorite);
+  };
+
+  const handleRemoveFavorite = async () => {
+    const realm = await getRealm();
+
+    const storedFavorite = user.favorites.find(fav => fav.id === id);
+
+    realm.write(() => {
+      realm.delete(storedFavorite);
+    });
 
     setFavorite(!favorite);
   };
@@ -48,7 +50,9 @@ const Channel = ({ id, title, thumbnail }) => {
 
       <Title>{title}</Title>
 
-      <SmallButton onPress={handleAddFavorite}>
+      <SmallButton
+        onPress={favorite ? handleRemoveFavorite : handleAddFavorite}
+      >
         <Icon name={favorite ? 'star' : 'star-o'} size={16} />
       </SmallButton>
     </Container>
