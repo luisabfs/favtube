@@ -19,14 +19,14 @@ import {
 } from './styles';
 
 const Search = () => {
+  const [pageToken, setPageToken] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [inputData, setInputData] = useState();
   const [channels, setChannels] = useState({
     items: [],
     nextPageToken: '',
     prevPageToken: '',
   });
-  const [pageToken, setPageToken] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [inputData, setInputData] = useState();
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -41,11 +41,11 @@ const Search = () => {
         nextPageToken: data.nextPageToken,
         prevPageToken: data.prevPageToken,
       });
-
-      setLoading(false);
     } catch (error) {
-      Alert.alert('Error retrieving Youtube channels. Please try again');
+      Alert.alert('Error retrieving Youtube channels. Please try again later');
     }
+
+    setLoading(false);
   };
 
   const prevPage = () => {

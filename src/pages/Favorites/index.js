@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -22,18 +22,13 @@ const Favorites = () => {
   const { user } = useAuth();
 
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     async function loadFavorites() {
-      setLoading(true);
-
       if (user) {
         setFavorites(user.favorites);
       }
-
-      setLoading(false);
     }
 
     loadFavorites();
@@ -50,20 +45,16 @@ const Favorites = () => {
         </Wrapper>
 
         <List>
-          {loading ? (
-            <ActivityIndicator color="#000" size={30} />
-          ) : (
-            <ScrollView>
-              {favorites.map(channel => (
-                <Channel
-                  key={channel.id}
-                  id={channel.id}
-                  title={channel.title}
-                  thumbnail={channel.thumbnail}
-                />
-              ))}
-            </ScrollView>
-          )}
+          <ScrollView>
+            {favorites.map(channel => (
+              <Channel
+                key={channel.id}
+                id={channel.id}
+                title={channel.title}
+                thumbnail={channel.thumbnail}
+              />
+            ))}
+          </ScrollView>
         </List>
       </FavoritesContainer>
 
