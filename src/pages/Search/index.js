@@ -19,16 +19,15 @@ import {
 } from './styles';
 
 const Search = () => {
-  const [pageToken, setPageToken] = useState('');
   const [loading, setLoading] = useState(false);
-  const [inputData, setInputData] = useState();
+  const [inputData, setInputData] = useState('');
   const [channels, setChannels] = useState({
     items: [],
     nextPageToken: '',
     prevPageToken: '',
   });
 
-  const handleSubmit = async () => {
+  const getChannels = async ({ pageToken = '' }) => {
     setLoading(true);
 
     try {
@@ -42,20 +41,10 @@ const Search = () => {
         prevPageToken: data.prevPageToken,
       });
     } catch (error) {
-      Alert.alert('Error retrieving Youtube channels. Please try again later');
+      Alert.alert('Error retrieving Youtube channels');
     }
 
     setLoading(false);
-  };
-
-  const prevPage = () => {
-    setPageToken(channels.prevPageToken);
-    handleSubmit();
-  };
-
-  const nextPage = () => {
-    setPageToken(channels.nextPageToken);
-    handleSubmit();
   };
 
   return (
@@ -68,9 +57,9 @@ const Search = () => {
             value={inputData}
             placeholder="Channels"
             onChangeText={setInputData}
-            onSubmitEditing={handleSubmit}
+            onSubmitEditing={getChannels}
           />
-          <SmallButton mode="dark" onPress={handleSubmit}>
+          <SmallButton mode="dark" onPress={getChannels}>
             <Icon name="search" size={16} />
           </SmallButton>
         </Wrapper>
@@ -95,7 +84,10 @@ const Search = () => {
 
       {channels.items.length !== 0 && !loading && (
         <Wrapper>
-          <SmallButton onPress={prevPage} disabled={!channels.prevPageToken}>
+          <SmallButton
+            onPress={() => getChannels({ pageToken: channels.prevPageToken })}
+            disabled={!channels.prevPageToken}
+          >
             <Icon
               name="chevron-left"
               size={16}
@@ -103,7 +95,9 @@ const Search = () => {
             />
           </SmallButton>
 
-          <SmallButton onPress={nextPage}>
+          <SmallButton
+            onPress={() => getChannels({ pageToken: channels.nextPageToken })}
+          >
             <Icon name="chevron-right" size={16} />
           </SmallButton>
         </Wrapper>
