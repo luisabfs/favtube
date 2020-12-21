@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -14,6 +14,7 @@ const SignIn = ({ setModal }) => {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const passwordInputRef = useRef(null);
 
   const handleSubmit = useCallback(async () => {
     try {
@@ -34,12 +35,18 @@ const SignIn = ({ setModal }) => {
           returnKeyType="next"
           onChangeText={setEmail}
           keyboardType="email-address"
+          onSubmitEditing={() => {
+            passwordInputRef.current.focus();
+          }}
         />
+
         <Input
+          ref={passwordInputRef}
           value={password}
           secureTextEntry
           placeholder="Password"
           onChangeText={setPassword}
+          onSubmitEditing={handleSubmit}
         />
       </Wrapper>
 
