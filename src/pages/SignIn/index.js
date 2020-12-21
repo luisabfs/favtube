@@ -54,16 +54,7 @@ const SignIn = ({ setModal }) => {
         <Button mode="dark" onPress={handleSubmit}>
           Sign in
         </Button>
-        <SmallButton
-          onPress={() =>
-            setModal({
-              isVisible: true,
-              content: 'signup',
-            })
-          }
-        >
-          new user
-        </SmallButton>
+        <SmallButton onPress={() => setModal('signup')}>new user</SmallButton>
       </Wrapper>
     </Container>
   );

@@ -17,19 +17,19 @@ const Onboarding = () => {
     content: '',
   });
 
-  const openSignInModal = useCallback(() => {
+  const openModal = useCallback(content => {
     setModal({
       isVisible: true,
-      content: 'signin',
+      content,
     });
   }, []);
 
-  const openSignUpModal = useCallback(() => {
+  const closeModal = useCallback(() => {
     setModal({
-      isVisible: true,
-      content: 'signup',
+      isVisible: false,
+      content: '',
     });
-  }, []);
+  }, [setModal]);
 
   return (
     <>
@@ -40,16 +40,16 @@ const Onboarding = () => {
         </Wrapper>
 
         <Wrapper>
-          <Button onPress={openSignInModal}>Sign In</Button>
-          <Button onPress={openSignUpModal}>Sign Up</Button>
+          <Button onPress={() => openModal('signin')}>Sign In</Button>
+          <Button onPress={() => openModal('signup')}>Sign Up</Button>
         </Wrapper>
       </Container>
 
-      <Modal modalVisible={modal.isVisible} setModal={setModal}>
+      <Modal modalVisible={modal.isVisible} closeModal={closeModal}>
         {modal.content === 'signin' ? (
-          <SignIn setModal={setModal} />
+          <SignIn setModal={openModal} />
         ) : (
-          <SignUp setModal={setModal} />
+          <SignUp openModal={openModal} closeModal={closeModal} />
         )}
       </Modal>
     </>

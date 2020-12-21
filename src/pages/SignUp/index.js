@@ -9,7 +9,7 @@ import getRealm from '../../services/realm';
 
 import { Container, Wrapper, Title, SmallButton } from './styles';
 
-const SignUp = ({ setModal }) => {
+const SignUp = ({ openModal, closeModal }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const passwordInputRef = useRef(null);
@@ -27,14 +27,11 @@ const SignUp = ({ setModal }) => {
         'You can log in the application now.',
       );
 
-      setModal({
-        isVisible: false,
-        content: '',
-      });
+      closeModal();
     } catch (error) {
       Alert.alert(error.message);
     }
-  }, [email, password, setModal]);
+  }, [closeModal, email, password]);
 
   return (
     <Container>
@@ -66,23 +63,15 @@ const SignUp = ({ setModal }) => {
         <Button mode="dark" onPress={handleSubmit}>
           Sign up
         </Button>
-        <SmallButton
-          onPress={() =>
-            setModal({
-              isVisible: true,
-              content: 'signin',
-            })
-          }
-        >
-          login
-        </SmallButton>
+        <SmallButton onPress={() => openModal('signin')}>login</SmallButton>
       </Wrapper>
     </Container>
   );
 };
 
 SignUp.propTypes = {
-  setModal: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default SignUp;
