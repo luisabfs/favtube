@@ -1,5 +1,7 @@
 # FavTube
 
+![FavTube interface](src/assets/print.png)
+
 Aplicação React Native que atende às seguintes funcionalidades:
 
 - [x] Cadastro de usuário;
@@ -16,7 +18,7 @@ Essas instruções irão lhe mostrar como realizar uma cópia desse projeto e ro
 ### Pré-requisitos
 
 - [Chave de API do Google](https://developers.google.com/youtube/v3/getting-started?hl=pt_br) para realizar as requisições ao Youtube Search API;
-        
+
 - [Ambiente React Native](https://react-native.rocketseat.dev/) com build para Android;
 
 ### Instalação
