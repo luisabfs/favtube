@@ -4,7 +4,7 @@ const UserSchema = {
   properties: {
     email: 'string',
     password: 'string',
-    favorites: { type: 'list', objectType: 'Favorite', default: '[]' },
+    favorites: 'Favorite[]',
     logged: { type: 'bool', default: false },
   },
 };

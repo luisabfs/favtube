@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -12,13 +12,14 @@ import { Container, Wrapper, Title, SmallButton } from './styles';
 const SignUp = ({ setModal }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const passwordInputRef = useRef(null);
 
   const handleSubmit = useCallback(async () => {
     try {
       const realm = await getRealm();
 
       realm.write(() => {
-        realm.create('User', { email, password });
+        realm.create('User', { email, password, favorites: [] });
       });
 
       Alert.alert(
@@ -46,13 +47,18 @@ const SignUp = ({ setModal }) => {
           returnKeyType="next"
           onChangeText={setEmail}
           keyboardType="email-address"
+          onSubmitEditing={() => {
+            passwordInputRef.current.focus();
+          }}
         />
 
         <Input
+          ref={passwordInputRef}
           value={password}
           secureTextEntry
           placeholder="Password"
           onChangeText={setPassword}
+          onSubmitEditing={handleSubmit}
         />
       </Wrapper>
 
