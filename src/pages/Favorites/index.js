@@ -26,9 +26,7 @@ const Favorites = () => {
 
   useEffect(() => {
     async function loadFavorites() {
-      if (user) {
-        setFavorites(user.favorites);
-      }
+      setFavorites(user.favorites);
     }
 
     loadFavorites();

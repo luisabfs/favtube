@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image } from 'react-native';
+import React, { useCallback } from 'react';
+import { Image, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { useNavigation } from '@react-navigation/native';
@@ -12,6 +12,14 @@ import { Container, Wrapper, Title, Icon, SmallButton } from './styles';
 const Profile = ({ hasFavorite }) => {
   const navigation = useNavigation();
   const { user, signOut } = useAuth();
+
+  const handleSignOut = useCallback(async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  }, [signOut]);
 
   return (
     <Container>
@@ -30,7 +38,7 @@ const Profile = ({ hasFavorite }) => {
           </SmallButton>
         )}
 
-        <SmallButton mode="dark" onPress={signOut}>
+        <SmallButton mode="dark" onPress={handleSignOut}>
           <Icon name="sign-out" color="#fff" size={16} />
         </SmallButton>
       </Wrapper>

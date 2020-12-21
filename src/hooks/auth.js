@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
 
 import getRealm from '../services/realm';
@@ -51,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
       setData({ loggedUser: user });
     } catch (error) {
-      Alert.alert(error.message);
+      throw new Error('Error logging in.');
     }
   }, []);
 
@@ -69,7 +68,7 @@ export const AuthProvider = ({ children }) => {
 
       setData({});
     } catch (error) {
-      Alert.alert(error.message);
+      throw new Error('Error logging out.');
     }
   }, [data.loggedUser]);
 
