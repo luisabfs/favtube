@@ -19,6 +19,7 @@ export const Title = styled.Text`
 export const Thumbnail = styled.Image`
   width: 40px;
   height: 40px;
+  border-radius: 2px;
 `;
 
 export const SmallButton = styled(Button)`
