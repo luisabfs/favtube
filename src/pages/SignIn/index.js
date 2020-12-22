@@ -12,17 +12,17 @@ import { Container, Wrapper, Title, SmallButton } from './styles';
 const SignIn = ({ setModal }) => {
   const { signIn } = useAuth();
 
-  const [email, setEmail] = useState();
+  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const passwordInputRef = useRef(null);
 
   const handleSubmit = useCallback(async () => {
     try {
-      await signIn({ email, password });
+      await signIn({ username, password });
     } catch (error) {
       Alert.alert(error.message);
     }
-  }, [email, password, signIn]);
+  }, [username, password, signIn]);
 
   return (
     <Container>
@@ -30,16 +30,15 @@ const SignIn = ({ setModal }) => {
 
       <Wrapper>
         <Input
-          value={email}
+          value={username}
           placeholder="User"
           returnKeyType="next"
-          onChangeText={setEmail}
-          keyboardType="email-address"
+          onChangeText={setUsername}
+          autoCapitalize="none"
           onSubmitEditing={() => {
             passwordInputRef.current.focus();
           }}
         />
-
         <Input
           ref={passwordInputRef}
           value={password}

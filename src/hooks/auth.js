@@ -28,24 +28,26 @@ export const AuthProvider = ({ children }) => {
     loadUsers();
   }, [data.loggedUser]);
 
-  const signIn = useCallback(async ({ email, password }) => {
+  const signIn = useCallback(async ({ username, password }) => {
     const realm = await getRealm();
 
-    const user = realm.objects('User').find(object => object.email === email);
+    const user = realm
+      .objects('User')
+      .find(object => object.username === username);
 
     if (!user) {
-      throw new Error('Incorrect email/password confirmation');
+      throw new Error('Incorrect username/password confirmation');
     }
 
     const comparePassword = user.password === password;
 
     if (!comparePassword) {
-      throw new Error('Incorrect email/password confirmation');
+      throw new Error('Incorrect username/password confirmation');
     }
 
     try {
       realm.write(() => {
-        realm.create('User', { email, logged: true }, 'modified');
+        realm.create('User', { username, logged: true }, 'modified');
       });
 
       setData({ loggedUser: user });
@@ -61,7 +63,7 @@ export const AuthProvider = ({ children }) => {
       realm.write(() => {
         realm.create(
           'User',
-          { email: data.loggedUser.email, logged: false },
+          { username: data.loggedUser.username, logged: false },
           'modified',
         );
       });

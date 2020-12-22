@@ -25,7 +25,7 @@ const Profile = ({ hasFavorite }) => {
     <Container>
       <Wrapper>
         <Image source={Avatar} />
-        <Title>{user.email}</Title>
+        <Title>{user.username}</Title>
       </Wrapper>
 
       <Wrapper>

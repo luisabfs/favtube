@@ -10,7 +10,7 @@ import getRealm from '../../services/realm';
 import { Container, Wrapper, Title, SmallButton } from './styles';
 
 const SignUp = ({ openModal, closeModal }) => {
-  const [email, setEmail] = useState();
+  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const passwordInputRef = useRef(null);
 
@@ -19,7 +19,7 @@ const SignUp = ({ openModal, closeModal }) => {
       const realm = await getRealm();
 
       realm.write(() => {
-        realm.create('User', { email, password, favorites: [] });
+        realm.create('User', { username, password, favorites: [] });
       });
 
       Alert.alert(
@@ -31,7 +31,7 @@ const SignUp = ({ openModal, closeModal }) => {
     } catch (error) {
       Alert.alert(error.message);
     }
-  }, [closeModal, email, password]);
+  }, [closeModal, username, password]);
 
   return (
     <Container>
@@ -39,11 +39,11 @@ const SignUp = ({ openModal, closeModal }) => {
 
       <Wrapper>
         <Input
-          value={email}
+          value={username}
           placeholder="User"
           returnKeyType="next"
-          onChangeText={setEmail}
-          keyboardType="email-address"
+          onChangeText={setUsername}
+          autoCapitalize="none"
           onSubmitEditing={() => {
             passwordInputRef.current.focus();
           }}

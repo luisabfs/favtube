@@ -1,8 +1,8 @@
 const UserSchema = {
   name: 'User',
-  primaryKey: 'email',
+  primaryKey: 'username',
   properties: {
-    email: 'string',
+    username: 'string',
     password: 'string',
     favorites: 'Favorite[]',
     logged: { type: 'bool', default: false },
