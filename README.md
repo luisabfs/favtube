@@ -11,7 +11,7 @@ Aplicação React Native que atende às seguintes funcionalidades:
 - [x] Salvar canais nos favoritos;
 - [x] Listar canais favoritados;
 
-## Getting Started
+## Por onde começar
 
 Essas instruções irão lhe mostrar como realizar uma cópia desse projeto e rodá-lo localmente em ambiente de desenvolvimento.
 
